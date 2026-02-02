@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💖</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ffd6e8, #fff0f6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.card {
+  background: white;
+  width: 90%;
+  max-width: 360px;
+  padding: 35px 20px;
+  border-radius: 30px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+h1 {
+  color: #ff4d8d;
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+.buttons {
+  position: relative;
+  height: 90px;
+}
+
+button {
+  border: none;
+  border-radius: 40px;
+  font-size: 16px;
+  cursor: pointer;
+  position: absolute;
+  transition: all 0.3s ease;
+}
+
+#yes {
+  background: #ff4d8d;
+  color: white;
+  padding: 14px 30px;
+  left: 50%;
+  transform: translateX(-50%) scale(1);
+  z-index: 2;
+}
+
+#no {
+  background: #eee;
+  color: #555;
+  padding: 12px 25px;
+  right: 0;
+}
+
+.yay {
+  display: none;
+}
+
+.yay h1 {
+  font-size: 28px;
+}
+
+.yay p {
+  color: #666;
+  font-size: 16px;
+}
+
+.emoji {
+  font-size: 70px;
+  animation: pop 1s infinite;
+}
+
+@keyframes pop {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: float 4s linear forwards;
+  color: #ff4d6d;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(100vh);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-10vh);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <div class="question">
+    <h1>Will you be my Valentine? 💕</h1>
+
+    <div class="buttons">
+      <button id="yes">Yes 💖</button>
+      <button id="no">No 😅</button>
+    </div>
+  </div>
+
+  <div class="yay" id="yay">
+    <div class="emoji">🥰</div>
+    <h1>YAYYYY 💖</h1>
+    <p>I knew it 😌 Happy Valentine’s 💕</p>
+  </div>
+</div>
+
+<script>
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+const yay = document.getElementById("yay");
+const question = document.querySelector(".question");
+
+let yesScale = 1;
+
+noBtn.addEventListener("click", () => {
+  yesScale += 0.25;
+  yesBtn.style.transform = `translateX(-50%) scale(${yesScale})`;
+
+  const x = Math.random() * 160 - 80;
+  const y = Math.random() * 40 - 20;
+  noBtn.style.transform = `translate(${x}px, ${y}px) scale(0.9)`;
+});
+
+yesBtn.addEventListener("click", () => {
+  question.style.display = "none";
+  yay.style.display = "block";
+
+  // floating hearts
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 15 + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 4000);
+  }, 250);
+});
+</script>
+
+</body>
+</html>
